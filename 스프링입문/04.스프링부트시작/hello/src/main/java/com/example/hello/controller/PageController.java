@@ -17,7 +17,7 @@ public class PageController {
     @ResponseBody
     @GetMapping("/user")
     public User user(){
-        var user = new User(); // User user = new User();의 간소화된 벚전
+        var user = new User(); // User user = new User();의 간소화된 버전
         user.setName("Hwang");
         user.setAddress("지구");
         return user;

@@ -3,7 +3,6 @@ package com.example.hello.controller;
 import com.example.hello.dto.UserRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLOutput;
 import java.util.Map;
 
 @RestController //해당 class는 rest api를 처리하는 controller로 등록
