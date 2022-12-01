@@ -8,6 +8,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
 @Aspect
@@ -21,19 +22,26 @@ public class DecodeAop {
     private void enableDecode(){}
 
     @Before("cut() && enableDecode()")
-    public void before(JoinPoint joinPoint){
+    public void before(JoinPoint joinPoint) throws UnsupportedEncodingException {
+
         Object[] args = joinPoint.getArgs();
-
         for(Object arg: args){
-            User user = User.class.cast(arg);
-            String base64Email = user.getEmail();
-
-            user.setEmail(Base64.getDecoder().decode()); ///////////////////////////////--여기부터
+            if (arg instanceof User){
+                User user = User.class.cast(arg);
+                String base64Email = user.getEmail();
+                String email = new String( Base64.getDecoder().decode(base64Email), "UTF-8") ;
+                user.setEmail(email);
+            }
         }
     }
 
     @AfterReturning(value = "cut() && enableDecode()", returning = "returnObj")
     public void afterReturn(JoinPoint joinPoint, Object returnObj){
-
+        if(returnObj instanceof User){
+            User user = User.class.cast(returnObj);
+            String email = user.getEmail();
+            String base64Email = Base64.getEncoder().encodeToString(email.getBytes());
+            user.setEmail(base64Email);
+        }
     }
 }
