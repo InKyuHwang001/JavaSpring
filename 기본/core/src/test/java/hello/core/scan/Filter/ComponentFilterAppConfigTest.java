@@ -1,4 +1,4 @@
-package hello.core.scan.Filter;
+package hello.core.scan.filter;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -6,29 +6,30 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.context.annotation.ComponentScan.Filter;
+import static org.assertj.core.api.Assertions.*;
+import static org.springframework.context.annotation.ComponentScan.*;
 
 public class ComponentFilterAppConfigTest {
-
     @Test
-    void filterScan(){
+    void filterScan() {
         ApplicationContext ac = new AnnotationConfigApplicationContext(ComponentFilterAppConfig.class);
 
         BeanA beanA = ac.getBean("beanA", BeanA.class);
         assertThat(beanA).isNotNull();
         Assertions.assertThrows(NoSuchBeanDefinitionException.class,
-                () -> ac.getBean("beanB", BeanB.class));
+                () -> ac.getBean("beanB", BeanB.class)
+        );
     }
 
     @Configuration
-    @ComponentScan(
+    @ComponentScan( // 커스텀으로 만들었던 어노테이션을 가지고있는 클래스를 필터로 제외포함 핸들링
             includeFilters = @Filter(type = FilterType.ANNOTATION, classes = MyIncludeComponent.class),
-            excludeFilters = @Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class))
+            excludeFilters = @Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class)
+    )
     static class ComponentFilterAppConfig {
     }
 }
+

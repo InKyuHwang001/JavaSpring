@@ -1,22 +1,14 @@
 package hello.core.member;
 
 public class Member {
-    private String name;
     private Long id;
+    private String name;
     private Grade grade;
 
-    public Member(String name, Long id, Grade grade) {
-        this.name = name;
+    public Member(Long id, String name, Grade grade) {
         this.id = id;
-        this.grade = grade;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
+        this.grade = grade;
     }
 
     public Long getId() {
@@ -25,6 +17,14 @@ public class Member {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Grade getGrade() {

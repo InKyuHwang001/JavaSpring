@@ -1,9 +1,6 @@
 package hello.core.singleton;
 
-import org.junit.jupiter.api.Test;
-
 public class StatefulService {
-
     private int price; //상태를 유지하는 필드
 
     public void order(String name, int price) {
@@ -14,5 +11,4 @@ public class StatefulService {
     public int getPrice() {
         return price;
     }
-
 }

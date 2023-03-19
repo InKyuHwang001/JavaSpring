@@ -1,5 +1,5 @@
-package hello.core.scan.Filter;
+package hello.core.scan.filter;
 
 @MyIncludeComponent
-public class BeanA{
+public class BeanA {
 }
