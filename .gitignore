@@ -5,7 +5,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### data_store ###
+# data_store
 *.DS_Store
 
 ### STS ###
@@ -38,3 +38,4 @@ out/
 
 ### VS Code ###
 .vscode/
+기본/.DS_Store

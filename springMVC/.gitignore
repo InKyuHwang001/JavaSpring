@@ -5,7 +5,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### data_store ###
+# data_store
 *.DS_Store
 
 ### STS ###
