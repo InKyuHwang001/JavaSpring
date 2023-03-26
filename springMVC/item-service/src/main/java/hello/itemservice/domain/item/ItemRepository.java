@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class ItemRepository {
 
-    private static final Map<Long, Item> store = new HashMap<>(); //static
-    private static long sequence = 0L; //static
+    private static final Map<Long, Item> store = new ConcurrentHashMap<>(); //static
+    private static Long sequence = 0L; //static AtomicLong 이 권장됨
 
     public Item save(Item item) {
         item.setId(++sequence);
